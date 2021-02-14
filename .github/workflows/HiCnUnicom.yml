@@ -1,10 +1,19 @@
 name: 联通掌厅签到
 
 on:
+  release:
+    types: published
+  # push:
+  #   branches:
+  #     - master
   workflow_dispatch:
   schedule:
     - cron: 03 05,21 * * ?
     
+env:
+  PUSH_KEY: ${{ secrets.PUSH_KEY }}
+  UPLOAD_BESULT_DIR: true
+  
 jobs:
   run-it:
     runs-on: ubuntu-latest
@@ -32,3 +41,10 @@ jobs:
               bash CnUnicom.sh ${u/,/ }
             done
 
+
+        - name: Upload result file
+              uses: actions/upload-artifact@master
+              if: env.UPLOAD_BESULT_DIR == 'true'
+              with:
+                name: result
+                path: ./*.txt

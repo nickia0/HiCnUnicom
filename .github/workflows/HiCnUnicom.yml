@@ -8,7 +8,7 @@ on:
   #     - master
   workflow_dispatch:
   schedule:
-    - cron: 03 05,21 * * ?
+    - cron: 03 16,4 * * ?
     
 env:
   PUSH_KEY: ${{ secrets.PUSH_KEY }}
